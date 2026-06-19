@@ -1,3 +1,5 @@
+// detecting button press
+
 var no=document.querySelectorAll(".drum").length ;
 
 for(var i=0; i<no ; i++){
@@ -5,8 +7,27 @@ for(var i=0; i<no ; i++){
 document.querySelectorAll(".drum")[i].addEventListener("click",function() {
     
    var button = this.innerHTML;
+   sound(button);
+   animate(button);
 
-    switch(button){
+  })
+}
+
+
+// detecting key press 
+
+document.addEventListener("keydown",function(key){
+    sound(event.key);
+    animate(event.key);
+
+})
+
+
+// function to make sound 
+
+function sound(key){
+
+switch(key){
 
         case "w":
             var tom1 = new Audio("tom-1.mp3");
@@ -39,6 +60,13 @@ document.querySelectorAll(".drum")[i].addEventListener("click",function() {
         default:
             console.log(button);
     }
-})
+}
 
+function animate(curr){
+
+    var active = document.querySelector("."+curr);
+    active.classList.add("pressed");
+    setTimeout(function(){
+        active.classList.remove("pressed");
+    },100)
 }
